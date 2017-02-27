@@ -17,13 +17,31 @@
 
 	'use strict';
 	declare var require: any;
-
+	import {JamesPoint} from './JamesPoint';
 	var Security = require('./Security.vue').default;
+	var io:SocketIOClientStatic = require('socket.io-client');
+
 
 	export default {
+
+		props: {
+			securities: Array<JamesPoint.StandardSecurity>(),
+			socket: io.Socket
+		},
 		components: {
 			Security
+		},
+		mounted: function() {
+			console.log('in here');
+			//Handle socket stuff
+            this.socket = io('http://localhost:8080');
+            // this.socket.on('dude', (data) => {
+            // 	console.log(data);
+            //     this.onEmit(data);
+            // });
 		}
+
+
 
 	}
 

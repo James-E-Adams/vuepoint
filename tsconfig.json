@@ -1,7 +1,7 @@
 {
     "version": "1.7.5",
     "compilerOptions": {
-        "target": "es5",
+        "target": "ES5",
         "module": "commonjs",
         "declaration": false,
         "noImplicitAny": false,
@@ -32,7 +32,6 @@
     ],
     "files": [
         "./src/App.ts",
-        "./src/components/Hello.ts",
         "./src/main.ts"
     ],
     "atom": {
