@@ -27,8 +27,8 @@
     },
     "compileOnSave": false,
     "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
+        "./:*+/:.ts+",
+        "!./node_modules/:*+/:.ts+"
     ],
     "files": [
         "./src/App.ts",

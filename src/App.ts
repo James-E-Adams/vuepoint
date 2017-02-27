@@ -4,16 +4,13 @@ declare var expose: any
 
 import VueComponent from 'vue-class-component'
 
-import Popup from './components/Popup'
-import Tabs from './components/Tabs'
-
+var Tabs = require('./components/Tabs.vue').default;
 require('expose?$!expose?jQuery!jquery');
 require('./App.css')
 require('./bootstrap-grid.css');
 require('./bootstrap-reboot.css');
 require('./bootstrap.css');
 require('bootstrap');
-require('interactjs');
 
 @VueComponent({
   template: require('./App.html'),
@@ -21,8 +18,7 @@ require('interactjs');
   props: {
   },
   components: {
-    Popup,
-    Tabs
+    Tabs,
   }
 })
 export default class {
