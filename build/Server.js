@@ -85,8 +85,8 @@ var JamesPoint;
             this.codes = JSON.parse(Externals.fs.readFileSync(Constants.securities_file, 'utf8')).codes;
             this.client = Externals.redis.createClient();
             this.app = Externals.express();
-            this.server = Externals.http.createServer(this.app);
-            this.io = Externals.io.listen(this.server);
+            // this.server=Externals.http.createServer(this.app);
+            // this.io=Externals.io.listen(this.server);
             //Webpack stuff.
             // handle fallback for HTML5 history API
             this.app.use(require('connect-history-api-fallback')());
@@ -111,6 +111,8 @@ var JamesPoint;
             // this.app.use('/static', Externals.express.static(Externals.path.join(__dirname, 'public')));
             // // Handle connection to the websocket
             //NEW SERVER
+            this.server = this.app.listen(8080);
+            this.io = Externals.io.listen(this.server);
             this.app.listen(8080, 'localhost', function (err) {
                 if (err) {
                     console.log(err);
@@ -133,7 +135,6 @@ var JamesPoint;
                                     return [4 /*yield*/, Bluebird.map(codes, this.lookupCode)];
                                 case 2:
                                     arr = _a.sent();
-                                    console.log("emitting!");
                                     socket.emit('dude', arr);
                                     return [2 /*return*/];
                             }

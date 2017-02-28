@@ -7,41 +7,29 @@
 	            <div class="col-md-3">Ask</div>
 	            <div class="col-md-3">Actions</div>
 	        </div>
-	        
-	        <security v-bind:bid="1" v-bind:ask="2" code="potato"></security>
+	        <!-- render the securities. (so easy) -->
+	        <security v-for="security in securities" v-bind:ask="(Number)(security.ask)" v-bind:bid="(Number)(security.bid)" v-bind:code="security.code"></security>
 	    </div>
 	</div>
 </template>
 
 <script>
+	///<reference path="../../node_modules/@types/socket.io-client/index.d.ts"/>
 
 	'use strict';
 	declare var require: any;
 	import {JamesPoint} from './JamesPoint';
 	var Security = require('./Security.vue').default;
-	var io:SocketIOClientStatic = require('socket.io-client');
-
 
 	export default {
 
 		props: {
 			securities: Array<JamesPoint.StandardSecurity>(),
-			socket: io.Socket
+			securityLookUp: Object,
 		},
 		components: {
 			Security
 		},
-		mounted: function() {
-			console.log('in here');
-			//Handle socket stuff
-            this.socket = io('http://localhost:8080');
-            // this.socket.on('dude', (data) => {
-            // 	console.log(data);
-            //     this.onEmit(data);
-            // });
-		}
-
-
 
 	}
 

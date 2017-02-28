@@ -12,5 +12,17 @@
 </template>
 
 <script>
+    'use strict';
+    declare var require: any;
+    import {JamesPoint} from './JamesPoint';
 
+    export default {
+
+        props: {
+            securities: Array<JamesPoint.StandardSecurity>(),
+        },
+        components: {
+        },
+
+    }
 </script>

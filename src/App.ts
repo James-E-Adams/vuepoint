@@ -20,6 +20,7 @@ require('bootstrap');
   components: {
     Tabs,
   }
+
 })
 export default class {
 

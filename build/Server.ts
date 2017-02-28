@@ -54,8 +54,8 @@ namespace JamesPoint {
             this.codes = JSON.parse(Externals.fs.readFileSync(Constants.securities_file,'utf8')).codes
             this.client = Externals.redis.createClient();
             this.app = Externals.express();
-            this.server=Externals.http.createServer(this.app);
-            this.io=Externals.io.listen(this.server);
+            // this.server=Externals.http.createServer(this.app);
+            // this.io=Externals.io.listen(this.server);
 
             //Webpack stuff.
 
@@ -88,6 +88,10 @@ namespace JamesPoint {
 
 
             //NEW SERVER
+            this.server = this.app.listen(8080);
+
+            this.io = Externals.io.listen(this.server);
+
             this.app.listen(8080, 'localhost', function (err) {
               if (err) {
                 console.log(err)
@@ -97,13 +101,14 @@ namespace JamesPoint {
             });
 
             //IO Socket stuff
+
+
             this.io.on('connection', async (socket) => {
                 console.log("we got a connection!")
                 setInterval( async () => {
                     const codes = await this.client.smembersAsync('codes');
                     const arr = await Bluebird.map(codes, this.lookupCode);
-                    console.log("emitting!")
-                    socket.emit('dude', arr)
+                    socket.emit('dude', arr);
                 },Constants.SOCKET_EMIT_SPEED);
             });
 
